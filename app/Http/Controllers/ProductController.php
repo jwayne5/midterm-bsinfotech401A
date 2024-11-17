@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\Student;
+use Illuminate\View\View;
 
-class ProductController extends Controller
+class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(): View
     {
-        //
+        $products = Product::all();
+        return view ('products.index')->with('products', $products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+ 
+    public function create(): View
     {
-        //
+        return view('products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+  
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $input = $request->all();
+        Product::create($input);
+        return redirect('products')->with('flash_message', 'Product Addedd!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(string $id): View
     {
-        //
+        $products = Product::find($id);
+        return view('products.show')->with('products', $products);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $products = Product::find($id);
+        return view('products.edit')->with('products', $products);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        //
+        $products = Product::find($id);
+        $input = $request->all();
+        $products->update($input);
+        return redirect('products')->with('flash_message', 'products Updated!');  
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        Product::destroy($id);
+        return redirect('products')->with('flash_message', 'products deleted!'); 
     }
 }
