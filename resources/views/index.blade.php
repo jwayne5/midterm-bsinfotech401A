@@ -1,1 +1,1 @@
-@extends('products.index')
+hey
