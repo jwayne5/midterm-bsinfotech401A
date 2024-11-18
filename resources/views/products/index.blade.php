@@ -130,35 +130,48 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
-                    {!! csrf_field() !!}
-                    @method("PATCH")
+                <form method="POST" action="{{ url('products/' . $products->id) }}" enctype="multipart/form-data">
+                    {{ method_field('PATCH') }}
+                    {{ csrf_field() }}
+                    
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="name-{{ $products->id }}" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name-{{ $products->id }}" name="name" value="{{ $products->name }}" required>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="mb-3">
+                        <label for="price-{{ $products->id }}" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price-{{ $products->id }}" name="price" value="{{ $products->price }}" required>
+                    </div>
+                    
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description-{{ $products->id }}" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description-{{ $products->id }}" name="description" value="{{ $products->description }}" required>
+                    </div>
+                    
+                    <!-- Image -->
+                    <div class="mb-3">
+                        <label for="image-{{ $products->id }}" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image-{{ $products->id }}" name="image">
+                        @if($products->image)
+                            <img src="{{ asset('storage/' . $products->image) }}" alt="{{ $products->name }}" width="100" class="mt-2">
+                        @endif
+                    </div>
 
-                    <label>Name</label><br>
-                    <input type="text" name="name" id="name" value="{{ $product->name }}" class="form-control"><br>
-
-                    <label>Price</label><br>
-                    <input type="text" name="price" id="price" value="{{ $products->price }}" class="form-control"><br>
-
-                    <label>Description</label><br>
-                    <input type="text" name="description" id="description" value="{{ $products->description }}" class="form-control"><br>
-
-                    <label>Image</label><br>
-                    <input type="file" name="image" class="form-control"><br>
-
-                    <!-- Display existing image if available -->
-                    @if($products->image)
-                        <br><img src="{{ asset('storage/' . $products->image) }}" alt="{{ $products->name }}" width="100"><br>
-                    @endif
-                    <br>
-
-                    <input type="submit" value="Update" class="btn btn-success">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
