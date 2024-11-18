@@ -18,7 +18,7 @@
         <input type="text" name="description" id="description" class="form-control"></br>
 
         <label>Image</label></br>
-        <input type="text" name="image" id="image" class="form-control"></br>
+        <input type="file" name="image" id="image" class="form-control"></br>
 
         <input type="submit" value="Save" class="btn btn-success">
         <a href="{{route('products.index')}}" class="btn btn-secondary">Cancel</a>

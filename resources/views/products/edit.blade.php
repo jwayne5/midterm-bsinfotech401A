@@ -20,7 +20,10 @@
         <input type="text" name="description" id="description" value="{{$products->description}}" class="form-control"></br>
 
         <label>Image</label></br>
-        <input type="text" name="image" id="image" value="{{$products->image}}" class="form-control"></br>
+        <input type="file" name="image" class="form-control"></br>
+          @if($product->image)
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
+          @endif</br>
         
         <input type="submit" value="Update" class="btn btn-success">
         <a href="{{route('products.index')}}" class="btn btn-secondary">Cancel</a>
