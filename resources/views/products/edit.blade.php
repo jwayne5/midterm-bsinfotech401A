@@ -5,7 +5,7 @@
   <div class="card-header">Add Product Page</div>
   <div class="card-body">
       
-      <form action="{{ url('products/' .$students->id) }}" method="post">
+      <form action="{{ url('products/' .$products->id) }}" method="post">
         {!! csrf_field() !!}
         @method("PATCH")
         <input type="hidden" name="id" id="id" value="{{$products->id}}" id="id" />
