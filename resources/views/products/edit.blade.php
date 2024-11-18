@@ -2,7 +2,7 @@
 @section('content')
  
 <div class="card">
-  <div class="card-header"><h1>Add Product Page</h1></div>
+  <div class="card-header"><h1>Add Product Page<</div>
   <div class="card-body">
       
       <form action="{{ url('products/' .$products->id) }}" method="post">
