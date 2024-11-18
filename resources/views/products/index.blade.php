@@ -118,6 +118,69 @@
                                            
                                             <a href="{{ url('/products/' . $item->id . '/edit') }}" title="Edit Products"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
  
+                                            @foreach($products as $product)
+    <!-- Edit Button: Triggering the Modal -->
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal-{{ $product->id }}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+    </button>
+@endforeach
+
+<!-- Edit Product Modal -->
+@foreach($products as $product)
+    <div class="modal fade" id="editProductModal-{{ $product->id }}" tabindex="-1" aria-labelledby="editProductModalLabel-{{ $product->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel-{{ $product->id }}">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form starts here -->
+                    <form action="{{ url('products/' .$product->id) }}" method="post" enctype="multipart/form-data">
+                        {!! csrf_field() !!}
+                        @method("PATCH")
+
+                        <input type="hidden" name="id" id="id" value="{{$product->id}}">
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="name-{{ $product->id }}" class="form-label">Name</label>
+                            <input type="text" name="name" id="name-{{ $product->id }}" value="{{$product->name}}" class="form-control">
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label for="price-{{ $product->id }}" class="form-label">Price</label>
+                            <input type="text" name="price" id="price-{{ $product->id }}" value="{{$product->price}}" class="form-control">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description-{{ $product->id }}" class="form-label">Description</label>
+                            <input type="text" name="description" id="description-{{ $product->id }}" value="{{$product->description}}" class="form-control">
+                        </div>
+
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label for="image-{{ $product->id }}" class="form-label">Image</label>
+                            <input type="file" name="image" class="form-control">
+                            @if($product->image)
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100" class="mt-2">
+                            @endif
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                    <!-- Form ends here -->
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
