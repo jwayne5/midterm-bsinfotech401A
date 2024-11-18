@@ -2,7 +2,7 @@
 @section('content')
  
 <div class="card">
-  <div class="card-header">Add Product Page</div>
+  <div class="card-header"><h1>Add Product Page</h1></div>
   <div class="card-body">
       
       <form action="{{ url('products/' .$products->id) }}" method="post">
@@ -23,7 +23,7 @@
         <input type="file" name="image" class="form-control"></br>
           @if($products->image)
             <img src="{{ asset('storage/' . $products->image) }}" alt="{{ $products->name }}" width="100">
-          @endif</br>
+          @endif</br></br>
         
         <input type="submit" value="Update" class="btn btn-success">
         <a href="{{route('products.index')}}" class="btn btn-secondary">Cancel</a>
