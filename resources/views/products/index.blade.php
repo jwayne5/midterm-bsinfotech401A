@@ -123,7 +123,7 @@
 
                                             </div>
                                             <div class="card-body">
-                                                <form action="{{ url('products/' . $product->id) }}" method="post" enctype="multipart/form-data">
+                                                <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
                                                     {!! csrf_field() !!}
 
                                                     <!-- Loop over all products -->
