@@ -67,19 +67,19 @@ class ProductController extends Controller
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the image
     ]);
 
-    $product = Product::find($id);
+    $products = Product::find($id);
 
     // Check if a new image was uploaded
     if ($request->hasFile('image')) {
         // Delete the old image if it exists
         if ($product->image) {
-            \Storage::disk('public')->delete($product->image);
+            \Storage::disk('public')->delete($products->image);
         }
 
         $validated['image'] = $request->file('image')->store('images', 'public');
     }
 
-    $product->update($validated);
+    $products->update($validated);
 
     return redirect('products')->with('flash_message', 'Product Updated!');
 }
