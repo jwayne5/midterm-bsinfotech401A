@@ -6,7 +6,9 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Laravel 9 Crud</h2>
+                        <h2>Products</h2>
+                        <h6>Abarro, Reynaldo Jr.</h6>
+                        <h6>Aquino, John Wayne</h6>
                     </div>
                     <div class="card-body">
                         <a href="{{ url('/products/create') }}" class="btn btn-success btn-sm" title="Add New Products">
