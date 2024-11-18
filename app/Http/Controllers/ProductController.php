@@ -54,8 +54,11 @@ class ProductController extends Controller
 
     public function edit(string $id): View
     {
-        $products = Product::find($id);
-        return view('products.edit')->with('products', $products);
+         // Fetch the product by its id
+    $product = Product::findOrFail($id);
+
+    // Pass the single product instance to the view
+    return view('products.edit', compact('product'));
     }
 
     public function update(Request $request, string $id): RedirectResponse
