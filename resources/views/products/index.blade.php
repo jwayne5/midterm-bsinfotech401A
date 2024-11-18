@@ -118,7 +118,73 @@
                                            
                                             <a href="{{ url('/products/' . $item->id . '/edit') }}" title="Edit Products"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
  
-                                                
+                                            <!-- Edit Button: Only One Button -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Product
+</button>
+
+@foreach($products as $product)
+    <!-- Edit Button for Each Product -->
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal"
+            data-id="{{ $product->id }}"
+            data-name="{{ $product->name }}"
+            data-price="{{ $product->price }}"
+            data-description="{{ $product->description }}"
+            data-image="{{ $product->image }}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+    </button>
+@endforeach
+
+<!-- Edit Product Modal: One Modal for All Products -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form starts here -->
+                <form id="editProductForm" action="" method="post" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    @method("PATCH")
+
+                    <input type="hidden" name="id" id="product-id">
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" id="product-name" class="form-control">
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" name="price" id="product-price" class="form-control">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" name="description" id="product-description" class="form-control">
+                    </div>
+
+                    <!-- Image -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" name="image" id="product-image" class="form-control">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+                <!-- Form ends here -->
+            </div>
+        </div>
+    </div>
+</div>
 
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
