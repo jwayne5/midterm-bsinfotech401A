@@ -22,7 +22,9 @@
         <label>Image</label></br>
         <input type="text" name="image" id="image" value="{{$products->image}}" class="form-control"></br>
         
-        <input type="submit" value="Update" class="btn btn-success"></br>
+        <input type="submit" value="Update" class="btn btn-success">
+        <a href="{{route('products.index')}}" class="btn btn-secondary">Cancel</a>
+
     </form>
    
   </div>
