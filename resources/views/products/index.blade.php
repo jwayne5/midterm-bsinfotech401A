@@ -44,7 +44,39 @@
                                         </td>
  
                                         <td>
+                                            
+                                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#productModal-{{ $item->id }}">
+                                                <i class="fa fa-eye" aria-hidden="true"></i> View
+                                            </button>
+
+                                            <!-- Modal -->
+<div class="modal fade" id="productModal-{{ $item->id }}" tabindex="-1" aria-labelledby="productModalLabel-{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel-{{ $item->id }}">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Name:</strong> {{ $item->name }}</p>
+                <p><strong>Price:</strong> {{ $item->price }}</p>
+                <p><strong>Description:</strong> {{ $item->description }}</p>
+                <p><strong>Image:</strong></p>
+                @if ($item->image)
+                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" width="100">
+                @else
+                    <p>No image available</p>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
                                             <a href="{{ url('/products/' . $item->id) }}" title="View Products"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                           
                                             <a href="{{ url('/products/' . $item->id . '/edit') }}" title="Edit Products"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
  
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
