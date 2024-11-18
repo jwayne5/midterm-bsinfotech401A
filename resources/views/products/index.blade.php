@@ -117,20 +117,20 @@
                                         
                                            
                                             <!-- Edit Button: Triggering the Modal -->
-<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal-{{ $product->id }}">
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal-{{ $products->id }}">
     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
 </button>
 
 <!-- Modal Structure for Edit Product -->
-<div class="modal fade" id="editProductModal-{{ $product->id }}" tabindex="-1" aria-labelledby="editProductModalLabel-{{ $product->id }}" aria-hidden="true">
+<div class="modal fade" id="editProductModal-{{ $products->id }}" tabindex="-1" aria-labelledby="editProductModalLabel-{{ $products->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editProductModalLabel-{{ $product->id }}">Edit Product</h5>
+                <h5 class="modal-title" id="editProductModalLabel-{{ $products->id }}">Edit Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('products/' . $product->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
                     {!! csrf_field() !!}
                     @method("PATCH")
 
@@ -138,17 +138,17 @@
                     <input type="text" name="name" id="name" value="{{ $product->name }}" class="form-control"><br>
 
                     <label>Price</label><br>
-                    <input type="text" name="price" id="price" value="{{ $product->price }}" class="form-control"><br>
+                    <input type="text" name="price" id="price" value="{{ $products->price }}" class="form-control"><br>
 
                     <label>Description</label><br>
-                    <input type="text" name="description" id="description" value="{{ $product->description }}" class="form-control"><br>
+                    <input type="text" name="description" id="description" value="{{ $products->description }}" class="form-control"><br>
 
                     <label>Image</label><br>
                     <input type="file" name="image" class="form-control"><br>
 
                     <!-- Display existing image if available -->
-                    @if($product->image)
-                        <br><img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100"><br>
+                    @if($products->image)
+                        <br><img src="{{ asset('storage/' . $products->image) }}" alt="{{ $products->name }}" width="100"><br>
                     @endif
                     <br>
 
