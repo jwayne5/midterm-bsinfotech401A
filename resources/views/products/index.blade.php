@@ -117,12 +117,6 @@
                                         
                                            
                                             <a href="{{ url('/products/' . $item->id . '/edit') }}" title="Edit Products"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
- 
-                                            <!-- Edit Button: Only One Button -->
-<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">
-    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Product
-</button>
-z    
 
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
