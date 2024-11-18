@@ -6,7 +6,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Products Crud</h2>
+                        <h2>Products CRUD</h2>
                         <h6>Abarro, Reynaldo Jr.</h6>
                         <h6>Aquino, John Wayne</h6>
                     </div>
@@ -116,8 +116,49 @@
 
                                         
                                            
-                                            <a href="{{ url('/products/' . $item->id . '/edit') }}" title="Edit Products"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
- 
+                                            <!-- Edit Button: Triggering the Modal -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal-{{ $product->id }}">
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+</button>
+
+<!-- Modal Structure for Edit Product -->
+<div class="modal fade" id="editProductModal-{{ $product->id }}" tabindex="-1" aria-labelledby="editProductModalLabel-{{ $product->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel-{{ $product->id }}">Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('products/' . $product->id) }}" method="post" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    @method("PATCH")
+
+                    <label>Name</label><br>
+                    <input type="text" name="name" id="name" value="{{ $product->name }}" class="form-control"><br>
+
+                    <label>Price</label><br>
+                    <input type="text" name="price" id="price" value="{{ $product->price }}" class="form-control"><br>
+
+                    <label>Description</label><br>
+                    <input type="text" name="description" id="description" value="{{ $product->description }}" class="form-control"><br>
+
+                    <label>Image</label><br>
+                    <input type="file" name="image" class="form-control"><br>
+
+                    <!-- Display existing image if available -->
+                    @if($product->image)
+                        <br><img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100"><br>
+                    @endif
+                    <br>
+
+                    <input type="submit" value="Update" class="btn btn-success">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
