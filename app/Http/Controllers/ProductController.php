@@ -45,12 +45,16 @@ class ProductController extends Controller
 
     public function update(Request $request, string $id): RedirectResponse
     {
-       
+        $products = Product::find($id);
+        $input = $request->all();
+        $products->update($input);
+        return redirect('products')->with('flash_message', 'Product Updated!');  
     }
 
     
     public function destroy(string $id): RedirectResponse
     {
-       
+        Product::destroy($id);
+        return redirect('products')->with('flash_message', 'Product deleted!');
     }
 }
