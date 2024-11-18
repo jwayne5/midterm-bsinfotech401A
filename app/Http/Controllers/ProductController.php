@@ -40,7 +40,7 @@ class ProductController extends Controller
     public function edit(string $id): View
     {
         $products = Product::find($id);
-        return view('products.edit')->with('products', $products)
+        return view('products.edit')->with('products', $products);
     }
 
     public function update(Request $request, string $id): RedirectResponse
