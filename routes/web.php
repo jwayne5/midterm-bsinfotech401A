@@ -18,3 +18,4 @@ Route::resource('products', ProductController::class);
 
 
 Route::get('/', [ProductController::class, 'index'])->name('products.index');
+

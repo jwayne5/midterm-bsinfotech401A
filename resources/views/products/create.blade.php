@@ -5,7 +5,7 @@
   <div class="card-header">Add products Page</div>
   <div class="card-body">
       
-      <form action="{{ url('products') }}" method="post">
+    <form action="{{ url('products') }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
 
         <label>Name</label></br>
