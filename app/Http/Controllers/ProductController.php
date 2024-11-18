@@ -26,17 +26,21 @@ class ProductController extends Controller
   
     public function store(Request $request): RedirectResponse
     {
-        
+        $input = $request->all();
+        Product::create($input);
+        return redirect('products')->with('flash_message', 'Product Added!');
     }
 
     public function show(string $id): View
     {
-        
+        $products = Product::find($id);
+        return view('products.show')->with('products', $products);
     }
 
     public function edit(string $id): View
     {
-        
+        $products = Product::find($id);
+        return view('products.edit')->with('products', $products)
     }
 
     public function update(Request $request, string $id): RedirectResponse
