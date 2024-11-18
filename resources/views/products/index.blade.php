@@ -118,7 +118,7 @@
                                            
                                            
     <!-- Edit Button: Triggering the Modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal-{{ $product->id }}">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal-{{ $products->id }}">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
     </button>
     @foreach($products as $product)
