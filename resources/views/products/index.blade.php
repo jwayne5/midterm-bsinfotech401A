@@ -116,7 +116,50 @@
 
                                         
                                            
-                                            <a href="{{ url('/products/' . $item->id . '/edit') }}" title="Edit Products"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <div class="card-header">
+                                                <h1>Edit Product Page</h1>
+                                            </div>
+                                            <div class="card-body">
+                                                <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
+                                                    {!! csrf_field() !!}
+                                                    @method("PATCH")
+                                            
+                                                    <!-- Hidden ID -->
+                                                    <input type="hidden" name="id" value="{{ $products->id }}" />
+                                            
+                                                    <!-- Product Name -->
+                                                    <label for="name">Name</label></br>
+                                                    <input type="text" name="name" id="name" value="{{ old('name', $products->name) }}" class="form-control"></br>
+                                            
+                                                    <!-- Product Price -->
+                                                    <label for="price">Price</label></br>
+                                                    <input type="text" name="price" id="price" value="{{ old('price', $products->price) }}" class="form-control"></br>
+                                            
+                                                    <!-- Product Description -->
+                                                    <label for="description">Description</label></br>
+                                                    <input type="text" name="description" id="description" value="{{ old('description', $products->description) }}" class="form-control"></br>
+                                            
+                                                    <!-- Product Image -->
+                                                    <label for="image">Image</label></br>
+                                                    <input type="file" name="image" id="image" class="form-control"></br>
+                                            
+                                                    <!-- Display Current Image -->
+                                                    @if($products->image)
+                                                        <div>
+                                                            <label>Current Image:</label>
+                                                            <img src="{{ asset('storage/' . $products->image) }}" alt="{{ $products->name }}" width="100">
+                                                        </div>
+                                                    @endif
+                                            
+                                                    </br>
+                                            
+                                                    <!-- Submit Button -->
+                                                    <input type="submit" value="Update" class="btn btn-success">
+                                            
+                                                    <!-- Cancel Button -->
+                                                    <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
+                                                </form>
+                                            </div>
  
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
