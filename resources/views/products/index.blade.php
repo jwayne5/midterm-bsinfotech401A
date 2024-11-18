@@ -118,26 +118,10 @@
                                            
                                             <div class="card-header">
                                                 <h1>Edit Product Page</h1>
-
-                                                
-
                                             </div>
                                             <div class="card-body">
-                                                <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
+                                                <form action="{{ url('products/' . $product->id) }}" method="post" enctype="multipart/form-data">
                                                     {!! csrf_field() !!}
-
-                                                    <!-- Loop over all products -->
-                                                @foreach($products as $product)
-                                                <td>{{ $product->id }}</td> <!-- Access each product's id -->
-                                                <td>{{ $product->name }}</td>
-                                                <td>{{ $product->price }}</td>
-                                                <td>{{ $product->description }}</td>
-                                                <td>
-                                                    @if($product->image)
-                                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
-                                                    @endif
-                                                </td>
-                                            @endforeach
                                                     @method("PATCH")
                                                 
                                                     <!-- Hidden ID -->
@@ -171,6 +155,24 @@
                                                     <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
                                                 </form>
                                             </div>
+
+                                            @foreach($products as $product)
+    <tr>
+        <td>{{ $product->id }}</td> <!-- Accessing the individual product's ID -->
+        <td>{{ $product->name }}</td>
+        <td>{{ $product->price }}</td>
+        <td>{{ $product->description }}</td>
+        <td>
+            @if($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
+            @endif
+        </td>
+        <td>
+            <a href="{{ url('products/' . $product->id) }}" class="btn btn-info btn-sm">View</a>
+            <a href="{{ url('products/' . $product->id . '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+        </td>
+    </tr>
+@endforeach
  
                                             <form method="POST" action="{{ url('/products' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
