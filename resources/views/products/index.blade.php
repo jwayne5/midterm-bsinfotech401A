@@ -119,58 +119,55 @@
                                             <div class="card-header">
                                                 <h1>Edit Product Page</h1>
 
-                                                <!-- Loop over all products -->
-                                                @foreach($products as $product)
-                                                    <td>{{ $product->id }}</td> <!-- Access each product's id -->
-                                                    <td>{{ $product->name }}</td>
-                                                    <td>{{ $product->price }}</td>
-                                                    <td>{{ $product->description }}</td>
-                                                    <td>
-                                                        @if($product->image)
-                                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
-                                                        @endif
-                                                    </td>
-                                                @endforeach
+                                                
 
                                             </div>
                                             <div class="card-body">
-                                                <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
+                                                <form action="{{ url('products/' . $product->id) }}" method="post" enctype="multipart/form-data">
                                                     {!! csrf_field() !!}
+
+                                                    <!-- Loop over all products -->
+                                                @foreach($products as $product)
+                                                <td>{{ $product->id }}</td> <!-- Access each product's id -->
+                                                <td>{{ $product->name }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->description }}</td>
+                                                <td>
+                                                    @if($product->image)
+                                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
+                                                    @endif
+                                                </td>
+                                            @endforeach
                                                     @method("PATCH")
-                                            
+                                                
                                                     <!-- Hidden ID -->
-                                                    <input type="hidden" name="id" value="{{ $products->id }}" />
-                                            
+                                                    <input type="hidden" name="id" value="{{ $product->id }}" />
+                                                
                                                     <!-- Product Name -->
                                                     <label for="name">Name</label></br>
-                                                    <input type="text" name="name" id="name" value="{{ old('name', $products->name) }}" class="form-control"></br>
-                                            
+                                                    <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}" class="form-control"></br>
+                                                
                                                     <!-- Product Price -->
                                                     <label for="price">Price</label></br>
-                                                    <input type="text" name="price" id="price" value="{{ old('price', $products->price) }}" class="form-control"></br>
-                                            
+                                                    <input type="text" name="price" id="price" value="{{ old('price', $product->price) }}" class="form-control"></br>
+                                                
                                                     <!-- Product Description -->
                                                     <label for="description">Description</label></br>
-                                                    <input type="text" name="description" id="description" value="{{ old('description', $products->description) }}" class="form-control"></br>
-                                            
+                                                    <input type="text" name="description" id="description" value="{{ old('description', $product->description) }}" class="form-control"></br>
+                                                
                                                     <!-- Product Image -->
                                                     <label for="image">Image</label></br>
                                                     <input type="file" name="image" id="image" class="form-control"></br>
-                                            
-                                                    <!-- Display Current Image -->
-                                                    @if($products->image)
+                                                
+                                                    @if($product->image)
                                                         <div>
                                                             <label>Current Image:</label>
-                                                            <img src="{{ asset('storage/' . $products->image) }}" alt="{{ $products->name }}" width="100">
+                                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
                                                         </div>
                                                     @endif
-                                            
-                                                    </br>
-                                            
-                                                    <!-- Submit Button -->
+                                                
+                                                    <br/>
                                                     <input type="submit" value="Update" class="btn btn-success">
-                                            
-                                                    <!-- Cancel Button -->
                                                     <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
                                                 </form>
                                             </div>
