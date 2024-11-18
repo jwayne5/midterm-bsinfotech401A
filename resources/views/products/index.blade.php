@@ -11,9 +11,48 @@
                         <h6>Aquino, John Wayne</h6>
                     </div>
                     <div class="card-body">
-                        <a href="{{ url('/products/create') }}" class="btn btn-success btn-sm" title="Add New Products">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                        
+                        <!-- Add New Product Button (Trigger Modal) -->
+                        <a href="#" 
+                        class="btn btn-success btn-sm" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#addProductModal">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
+
+                        <!-- Modal for Adding New Product -->
+                        <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url('products') }}" method="post" enctype="multipart/form-data">
+                                        {!! csrf_field() !!}
+
+                                        <label>Name</label></br>
+                                        <input type="text" name="name" id="name" class="form-control"></br>
+
+                                        <label>Price</label></br>
+                                        <input type="text" name="price" id="price" class="form-control"></br>
+
+                                        <label>Description</label></br>
+                                        <input type="text" name="description" id="description" class="form-control"></br>
+
+                                        <label>Image</label></br>
+                                        <input type="file" name="image" id="image" class="form-control"></br>
+
+                                        <input type="submit" value="Save" class="btn btn-success">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+
                         <br/>
                         <br/>
                         <div class="table-responsive">
