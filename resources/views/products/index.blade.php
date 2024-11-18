@@ -9,7 +9,7 @@
                         <h2>Laravel 9 Crud</h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{ url('/students/create') }}" class="btn btn-success btn-sm" title="Add New Products">
+                        <a href="{{ url('/products/create') }}" class="btn btn-success btn-sm" title="Add New Products">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
                         <br/>
