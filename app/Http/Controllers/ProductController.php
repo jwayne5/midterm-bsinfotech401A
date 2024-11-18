@@ -25,11 +25,26 @@ class ProductController extends Controller
 
   
     public function store(Request $request): RedirectResponse
-    {
-        $input = $request->all();
-        Product::create($input);
-        return redirect('products')->with('flash_message', 'Product Added!');
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|integer',
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the image
+    ]);
+
+    $imagePath = null;
+
+    // Check if an image was uploaded
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public'); // Save to 'storage/app/public/images'
     }
+
+    // Save the product with the image path
+    Product::create(array_merge($validated, ['image' => $imagePath]));
+
+    return redirect('products')->with('flash_message', 'Product Added!');
+}
 
     public function show(string $id): View
     {
@@ -44,12 +59,30 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, string $id): RedirectResponse
-    {
-        $products = Product::find($id);
-        $input = $request->all();
-        $products->update($input);
-        return redirect('products')->with('flash_message', 'Product Updated!');  
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|integer',
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the image
+    ]);
+
+    $product = Product::find($id);
+
+    // Check if a new image was uploaded
+    if ($request->hasFile('image')) {
+        // Delete the old image if it exists
+        if ($product->image) {
+            \Storage::disk('public')->delete($product->image);
+        }
+
+        $validated['image'] = $request->file('image')->store('images', 'public');
     }
+
+    $product->update($validated);
+
+    return redirect('products')->with('flash_message', 'Product Updated!');
+}
 
     
     public function destroy(string $id): RedirectResponse

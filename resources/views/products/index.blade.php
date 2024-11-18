@@ -35,7 +35,13 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->description }}</td>
-                                        <td>{{ $item->image }}</td>
+                                        <td>
+                                            @if ($item->image)
+                                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" width="100">
+                                            @else
+                                                No image available
+                                            @endif
+                                        </td>
  
                                         <td>
                                             <a href="{{ url('/products/' . $item->id) }}" title="View Products"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
