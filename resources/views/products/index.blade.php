@@ -6,7 +6,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Products</h2>
+                        <h2>Products Crud</h2>
                         <h6>Abarro, Reynaldo Jr.</h6>
                         <h6>Aquino, John Wayne</h6>
                     </div>
