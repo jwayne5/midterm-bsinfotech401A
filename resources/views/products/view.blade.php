@@ -12,6 +12,9 @@
         <p class="card-text">Price : {{ $products->price }}</p>
         <p class="card-text">Description : {{ $products->description }}</p>
         <p class="card-text">Image : {{ $products->image }}</p>
+
+        <a href="{{route('products.index')}}" class="btn btn-secondary">Cancel</a>
+
   </div>
        
     </hr>
