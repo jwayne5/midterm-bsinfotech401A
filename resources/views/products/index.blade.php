@@ -118,6 +118,20 @@
                                            
                                             <div class="card-header">
                                                 <h1>Edit Product Page</h1>
+
+                                                <!-- Loop over all products -->
+                                                @foreach($products as $product)
+                                                    <td>{{ $product->id }}</td> <!-- Access each product's id -->
+                                                    <td>{{ $product->name }}</td>
+                                                    <td>{{ $product->price }}</td>
+                                                    <td>{{ $product->description }}</td>
+                                                    <td>
+                                                        @if($product->image)
+                                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
+                                                        @endif
+                                                    </td>
+                                                @endforeach
+
                                             </div>
                                             <div class="card-body">
                                                 <form action="{{ url('products/' . $products->id) }}" method="post" enctype="multipart/form-data">
