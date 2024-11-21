@@ -9,16 +9,17 @@
                         <h2>Products CRUD</h2>
                         <h6>Abarro, Reynaldo Jr.</h6>
                         <h6>Aquino, John Wayne</h6>
-                    </div>
-                    <div class="card-body">
-                        
-                        <!-- Add New Product Button (Trigger Modal) -->
                         <a href="#" 
                         class="btn btn-success btn-sm" 
                         data-bs-toggle="modal" 
                         data-bs-target="#addProductModal">
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
+                    </div>
+                    <div class="card-body">
+                        
+                        <!-- Add New Product Button (Trigger Modal) -->
+                        
 
                         <!-- Modal for Adding New Product -->
                         <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
@@ -53,8 +54,8 @@
                         </div>
 
 
-                        <br/>
-                        <br/>
+                      
+                     
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
