@@ -30,7 +30,7 @@ class ProductController extends Controller
         'name' => 'required|string|max:255',
         'price' => 'required|integer',
         'description' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the image
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000', // Validate the image
     ]);
 
     $imagePath = null;
